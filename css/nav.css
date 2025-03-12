@@ -6,6 +6,14 @@
     background-color: #333;
     padding: 15px 20px;
     color: white;
+    width: 100%;
+}
+
+/* Centering the navigation links */
+.nav-container {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
 }
 
 .logo {
@@ -13,21 +21,27 @@
     font-weight: bold;
 }
 
+/* Adjusting nav-links to center */
 .nav-links {
     list-style: none;
     display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
 }
 
+/* Individual nav items */
 .nav-links li {
-    margin: 0 10px;
+    display: flex;
 }
 
+/* Styling links and button */
 .nav-links a, .login-btn {
     text-decoration: none;
     color: white;
     padding: 10px 15px;
     border-radius: 5px;
-    transition: background 0.3s;
+    transition: background 0.3s ease-in-out;
     background: none;
     border: none;
     cursor: pointer;
@@ -36,4 +50,22 @@
 
 .nav-links a:hover, .login-btn:hover {
     background-color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .nav-container {
+        margin-top: 10px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+    }
 }

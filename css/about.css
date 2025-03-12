@@ -1,11 +1,64 @@
 /* General Styling */
-body {
-    font-family: Arial, sans-serif;
+/* Navbar Styling */
+.navbar {
+    position: fixed; /* Keeps navbar fixed at the top */
+    top: 0;
+    left: 0;
+    width: 100%; /* Makes it span the full width */
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    color: white;
+    z-index: 1000; /* Ensures navbar is always on top */
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    text-align: center;
 }
+
+.nav-links li {
+    margin: 0 10px;
+}
+
+.nav-links a, .login-btn {
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.nav-links a:hover, .login-btn:hover {
+    background-color: #555;
+}
+
+/* Adjust Body to Avoid Overlap */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    padding-top: 70px; /* Adjust this based on navbar height */
+}
+
 
 /* About Section */
 .about-container {
