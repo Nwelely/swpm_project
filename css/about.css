@@ -1,148 +1,133 @@
-/* General Styling */
-/* Navbar Styling */
-.navbar {
-    position: fixed; /* Keeps navbar fixed at the top */
-    top: 0;
-    left: 0;
-    width: 100%; /* Makes it span the full width */
-    background-color: #333;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    color: white;
-    z-index: 1000; /* Ensures navbar is always on top */
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
+/* General Reset */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-.nav-links li {
-    margin: 0 10px;
-}
-
-.nav-links a, .login-btn {
-    text-decoration: none;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background 0.3s;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.nav-links a:hover, .login-btn:hover {
-    background-color: #555;
-}
-
-/* Adjust Body to Avoid Overlap */
+/* Body Styling */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    padding-top: 70px; /* Adjust this based on navbar height */
-}
-
-
-/* About Section */
-.about-container {
-    background-color: #007bff;
+    background: linear-gradient(135deg, #667eea, #764ba2); /* Modern Gradient */
     color: white;
-    padding: 50px 20px;
+    text-align: center;
+    padding-top: 80px; /* Prevent overlap with fixed navbar */
 }
 
-.about-container h1 {
-    font-size: 36px;
+/* ================= HERO SECTION ================= */
+.hero {
+    width: 100%;
+    padding: 80px 20px;
+    background: rgba(255, 255, 255, 0.15); /* Glass effect */
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    text-align: center;
 }
 
-.about-container p {
+.hero h1 {
+    font-size: 40px;
+}
+
+.hero p {
     font-size: 18px;
     max-width: 600px;
     margin: auto;
+    color: rgba(255, 255, 255, 0.9);
 }
 
-/* Mission Section */
+/* ================= MISSION SECTION ================= */
 .mission {
     padding: 40px 20px;
-    background: white;
+    background: rgba(255, 255, 255, 0.2);
     max-width: 800px;
     margin: 30px auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    text-align: center;
 }
 
 .mission h2 {
-    color: #333;
+    color: white;
 }
 
-/* Team Section */
+.mission p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* ================= TEAM SECTION (Cards) ================= */
 .team {
-    background-color: #f4f4f4;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
     padding: 50px 20px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .team h2 {
     font-size: 28px;
     margin-bottom: 20px;
+    color: white;
 }
 
-.team-members {
+/* Grid Layout for Team */
+.team-grid {
     display: flex;
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
 }
 
-.team-member {
-    background: white;
+/* Individual Team Card */
+.team-card {
+    background: rgba(255, 255, 255, 0.2);
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
     width: 250px;
+    transition: 0.3s ease-in-out;
 }
 
-.team-member img {
+/* Team Card Hover Effect */
+.team-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Team Member Images */
+.team-card img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
+    border: 2px solid white;
 }
 
-.team-member h3 {
+/* Team Member Details */
+.team-card h3 {
     margin: 10px 0 5px;
-    color: #007bff;
+    color: #ff7eb3;
 }
 
-.team-member p {
+.team-card p {
     font-size: 14px;
-    color: #555;
+    color: rgba(255, 255, 255, 0.8);
 }
 
-/* Responsive Design */
+/* ================= RESPONSIVE DESIGN ================= */
 @media (max-width: 768px) {
-    .team-members {
-        flex-direction: column;
-        align-items: center;
+    /* Responsive Hero & Team Section */
+    .hero,
+    .mission,
+    .team {
+        width: 90%;
     }
 
-    .mission {
-        width: 90%;
+    .team-grid {
+        flex-direction: column;
+        align-items: center;
     }
 }
