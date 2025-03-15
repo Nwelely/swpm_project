@@ -1,31 +1,46 @@
-document.getElementById("login-form").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevents form submission
+// Dummy user data (Replace this with actual backend authentication)
+const users = [
+    { username: "nour", email: "n@gmail.com", password: "1234567n" }, // Replace with actual user data", email: "example@example.com", password: "examplePassword" }
+];
 
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
+document.addEventListener("DOMContentLoaded", function () {
+    const loginForm = document.getElementById("login-form");
 
-    // Dummy Authentication (Replace with actual backend logic)
-    if (username === "user" && password === "1234") {
-        alert("Login successful!");
-        window.location.href = "dashboard.html"; // Redirect (change this as needed)
-    } else {
-        alert("Invalid username or password!");
+    if (loginForm) {
+        loginForm.addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            // Check if the user exists
+            const user = users.find(user => user.username === username && user.password === password);
+
+            if (user) {
+               
+                window.location.href = "index.html"; // Redirect to the home page
+            } else {
+                alert("Invalid username or password!");
+            }
+        });
+    }
+
+    // Ensure sign-up link redirects properly
+    const signupLink = document.querySelector("a[onclick='showSignup()']");
+    if (signupLink) {
+        signupLink.addEventListener("click", function () {
+            window.location.href = "signup.html";
+        });
     }
 });
 
-// Function to Toggle Password Visibility
+// Function to toggle password visibility
 function togglePassword() {
-    let passwordField = document.getElementById("password");
-    if (passwordField.type === "password") {
-        passwordField.type = "text";
-    } else {
-        passwordField.type = "password";
-    }
+    const passwordField = document.getElementById("password");
+    passwordField.type = passwordField.type === "password" ? "text" : "password";
 }
 
-// Function to Handle Sign-Up Click
 function showSignup() {
     // Redirect to signup.html (Change the filename if needed)
     window.location.href = "signup.html";
 }
-

@@ -1,41 +1,58 @@
-document.getElementById("signup-form").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevents form submission
+const users = [];
 
-    let username = document.getElementById("username").value;
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-    let confirmPassword = document.getElementById("confirm-password").value;
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("signup-form");
 
-    // Basic Validation
-    if (password !== confirmPassword) {
-        alert("Passwords do not match!");
-        return;
-    }
+    form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent form submission
 
-    if (password.length < 6) {
-        alert("Password must be at least 6 characters long!");
-        return;
-    }
+        const username = document.getElementById("username").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
 
-    // Save User Data (In Local Storage for Testing)
-    let user = {
-        username: username,
-        email: email,
-        password: password
-    };
+        let isValid = true;
 
-    localStorage.setItem("user", JSON.stringify(user));
+        // Username validation: At least 3 characters, only letters and numbers
+        if (!/^[a-zA-Z0-9]{3,}$/.test(username)) {
+            alert("Username must be at least 3 characters long and contain only letters/numbers.");
+            isValid = false;
+        }
 
-    alert("Sign Up Successful! Redirecting to login...");
-    window.location.href = "index.html"; // Redirect to login page
+        // Email validation: Standard email format
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            alert("Enter a valid email address.");
+            isValid = false;
+        }
+
+        // Password validation: At least 8 characters, one letter, one number
+        if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
+            alert("Password must be at least 8 characters long and include at least one letter and one number.");
+            isValid = false;
+        }
+
+        // Confirm password validation
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            isValid = false;
+        }
+
+        if (!isValid) return;
+
+        // Store user in array
+        const user = { username, email, password };
+        users.push(user);
+
+        console.log(users);
+        alert("User registered successfully!");
+
+        // Redirect to login page
+        window.location.href = "../html/login.html";
+    });
 });
 
-// Toggle Password Visibility
-function togglePassword(fieldId) {
-    let passwordField = document.getElementById(fieldId);
+// Toggle password visibility
+function togglePassword(id) {
+    const passwordField = document.getElementById(id);
     passwordField.type = passwordField.type === "password" ? "text" : "password";
-}
-function showSignup() {
-    // Redirect to signup.html (Change the filename if needed)
-    window.location.href = "signup.html";
 }
