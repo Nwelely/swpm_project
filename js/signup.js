@@ -1,5 +1,3 @@
-const users = [];
-
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("signup-form");
 
@@ -39,12 +37,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!isValid) return;
 
-        // Store user in array
+        // Retrieve users from local storage (if any)
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+
+        // Check if username or email already exists
+        if (users.some(user => user.username === username)) {
+            alert("Username already exists. Please choose another one.");
+            return;
+        }
+        if (users.some(user => user.email === email)) {
+            alert("Email already exists. Please use another one.");
+            return;
+        }
+
+        // Store new user
         const user = { username, email, password };
         users.push(user);
 
-        console.log(users);
-        alert("User registered successfully!");
+        localStorage.setItem("users", JSON.stringify(users)); // Save to local storage
+
+        
 
         // Redirect to login page
         window.location.href = "../html/login.html";

@@ -1,27 +1,41 @@
-document.addEventListener("DOMContentLoaded", loadHabits);
+document.addEventListener("DOMContentLoaded", function () {
+    const loggedInUser = getLoggedInUser();
+
+    if (!loggedInUser) {
+        alert("Please log in to manage your habits.");
+        window.location.href = "login.html"; // Redirect if not logged in
+        return;
+    }
+
+    loadHabits();
+});
 
 function addHabit() {
-    let habitInput = document.getElementById("habit-input");
-    let habitText = habitInput.value.trim();
-    
+    const habitInput = document.getElementById("habit-input");
+    const habitText = habitInput.value.trim();
+
     if (habitText === "") return;
 
-    let habit = {
-        name: habitText,
-        completed: false
-    };
+    const loggedInUser = getLoggedInUser();
+    if (!loggedInUser) return;
 
-    let habits = JSON.parse(localStorage.getItem("habits")) || [];
-    habits.push(habit);
-    localStorage.setItem("habits", JSON.stringify(habits));
+    let userHabits = JSON.parse(localStorage.getItem(`habits_${loggedInUser}`)) || [];
+    
+    const habit = { name: habitText, completed: false };
+    userHabits.push(habit);
+
+    localStorage.setItem(`habits_${loggedInUser}`, JSON.stringify(userHabits));
 
     habitInput.value = "";
     loadHabits();
 }
 
 function loadHabits() {
-    let habits = JSON.parse(localStorage.getItem("habits")) || [];
-    let habitList = document.getElementById("habit-list");
+    const loggedInUser = getLoggedInUser();
+    if (!loggedInUser) return;
+
+    let habits = JSON.parse(localStorage.getItem(`habits_${loggedInUser}`)) || [];
+    const habitList = document.getElementById("habit-list");
     habitList.innerHTML = "";
 
     habits.forEach((habit, index) => {
@@ -50,14 +64,26 @@ function loadHabits() {
 }
 
 function toggleHabit(index) {
-    let habits = JSON.parse(localStorage.getItem("habits")) || [];
+    const loggedInUser = getLoggedInUser();
+    if (!loggedInUser) return;
+
+    let habits = JSON.parse(localStorage.getItem(`habits_${loggedInUser}`)) || [];
     habits[index].completed = !habits[index].completed;
-    localStorage.setItem("habits", JSON.stringify(habits));
+    localStorage.setItem(`habits_${loggedInUser}`, JSON.stringify(habits));
 }
 
 function deleteHabit(index) {
-    let habits = JSON.parse(localStorage.getItem("habits")) || [];
+    const loggedInUser = getLoggedInUser();
+    if (!loggedInUser) return;
+
+    let habits = JSON.parse(localStorage.getItem(`habits_${loggedInUser}`)) || [];
     habits.splice(index, 1);
-    localStorage.setItem("habits", JSON.stringify(habits));
+    localStorage.setItem(`habits_${loggedInUser}`, JSON.stringify(habits));
+    
     loadHabits();
+}
+
+// Helper function to get the logged-in user
+function getLoggedInUser() {
+    return localStorage.getItem("loggedInUser");
 }
