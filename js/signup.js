@@ -24,10 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Password validation: At least 8 characters, one letter, one number
-        if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
-            alert("Password must be at least 8 characters long and include at least one letter and one number.");
-            isValid = false;
-        }
+        //if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
+           // alert("Password must be at least 8 characters long and include at least one letter and one number.");
+          //  isValid = false;
+//}
 
         // Confirm password validation
         if (password !== confirmPassword) {
